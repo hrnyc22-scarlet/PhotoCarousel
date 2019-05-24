@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "teamscarlet",
   "version": "",
   "description": "",
   "author": "",
@@ -7,11 +7,24 @@
   "engines": {
     "node": ">=6.13.0"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
+    "async": "^2.6.2",
+    "axios": "^0.18.0",
+    "bluebird": "^3.5.4",
+    "faker": "^4.1.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.0",
+    "parcel-bundler": "^1.12.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "sequelize": "^5.8.6",
+    "sqlite3": "^4.0.8"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "jest": "^24.8.0",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2"
   }
 }

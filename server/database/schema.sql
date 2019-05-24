@@ -5,46 +5,7 @@
 -- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- SET FOREIGN_KEY_CHECKS=0;
 
--- ---
--- Table 'hotels'
--- 
--- ---
 
-DROP TABLE IF EXISTS `hotels`;
-		
-CREATE TABLE `hotels` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT DEFAULT NULL,
-  `name` VARCHAR(250) NOT NULL DEFAULT 'NULL',
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'hotels_pictures'
--- 
--- ---
-
-DROP TABLE IF EXISTS `hotels_pictures`;
-		
-CREATE TABLE `hotels_pictures` (
-  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-  `id_hotels` INTEGER NOT NULL DEFAULT NULL,
-  `id_pictures` INTEGER(60) NOT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'pictures'
--- 
--- ---
-
-DROP TABLE IF EXISTS `pictures`;
-		
-CREATE TABLE `pictures` (
-  `id` INTEGER(60) NOT NULL AUTO_INCREMENT,
-  `url` VARCHAR(60) NOT NULL,
-  `id_categories` INTEGER NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
 
 -- ---
 -- Table 'categories'
@@ -54,18 +15,72 @@ CREATE TABLE `pictures` (
 DROP TABLE IF EXISTS `categories`;
 		
 CREATE TABLE `categories` (
-  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `id` INTEGER NULL DEFAULT NULL,
   `category` VARCHAR NOT NULL,
   PRIMARY KEY (`id`)
 );
+
+
+
+-- ---
+-- Table 'hotels'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `hotels`;
+		
+CREATE TABLE `hotels` (
+  `id` INTEGER NOT NULL,
+  `name` VARCHAR(250) NOT NULL DEFAULT 'NULL',
+  PRIMARY KEY (`id`)
+);
+
+
+
+-- ---
+-- Table 'pictures'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `pictures`;
+		
+CREATE TABLE `pictures` (
+  `id` INTEGER NOT NULL,
+  `url` VARCHAR(60) NOT NULL,
+  `id_category` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`id_category`) REFERENCES `categories` (`id`)
+);
+
+
+
+
+-- ---
+-- Table 'hotels_pictures'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `hotels_pictures`;
+		
+CREATE TABLE `hotels_pictures` (
+  `id` INTEGER NULL,
+  `id_hotels` INTEGER NOT NULL DEFAULT NULL,
+  `id_pictures` INTEGER(60) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`id_hotels`) REFERENCES `hotels` (`id`),
+  FOREIGN KEY (`id_pictures`) REFERENCES `pictures` (`id`)
+);
+
+
+
 
 -- ---
 -- Foreign Keys 
 -- ---
 
-ALTER TABLE `hotels_pictures` ADD FOREIGN KEY (id_hotels) REFERENCES `hotels` (`id`);
-ALTER TABLE `hotels_pictures` ADD FOREIGN KEY (id_pictures) REFERENCES `pictures` (`id`);
-ALTER TABLE `pictures` ADD FOREIGN KEY (id_categories) REFERENCES `categories` (`id`);
+-- ALTER TABLE `hotels_pictures` ADD FOREIGN KEY (id_hotels) REFERENCES `hotels` (`id`);
+-- ALTER TABLE `hotels_pictures` ADD FOREIGN KEY (id_pictures) REFERENCES `pictures` (`id`);
+-- ALTER TABLE `pictures` ADD FOREIGN KEY (id_categories) REFERENCES `categories` (`id`);
 
 -- ---
 -- Table Properties
