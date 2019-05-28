@@ -1,10 +1,11 @@
-const faker = require('faker');
-const sqlite3 = require('sqlite3').verbose();
-const fs = require('fs');
-const path = require('path');
+//const faker = require('faker');
+//const sqlite3 = require('sqlite3').verbose();
+//const fs = require('fs');
+//const path = require('path');
+const db = require('./database.js');
 //const readline = require('readline');
+const Promise = require('bluebird');
 
-const pathnameToDb = path.join(__dirname, 'tripadvisor.db');
 
 
 const propertiesNames = [
@@ -123,20 +124,24 @@ var categories = [
   "Water"
 ]
 
+var numberOfS3Pics = 58; //need to upload more photos later
 
 
-let db = new sqlite3.Database(pathnameToDb, sqlite3.OPEN_READWRITE, (err) => {
-  if (err) {
-    console.error(err.message);
-  }
-  console.log('Connected to the tripadvisor database.');
-});
 
+categories.forEach((category) => {
+  db.run(`INSERT INTO categories (category) VALUES (?)`, [category], (err) => {
+    if (err) {
+      return console.error(err.message);
+    }
+
+    console.log(`Categories were inserted`);
+  })
+})
 
 propertiesNames.forEach(propertyName => {
   db.run(`INSERT INTO hotels (name) VALUES (?)`, [propertyName], (err) => {
     if (err) {
-      return console.log(err.message);
+      return console.error(err.message);
     }
    
       console.log(`Hotel names have been inserted`);
@@ -144,7 +149,7 @@ propertiesNames.forEach(propertyName => {
   }
 )
 
-for (var photoIndex = 1; photoIndex <= 58; photoIndex++) { //change photoindex limit when more photos added to S3
+for (var photoIndex = 1; photoIndex <= numberOfS3Pics; photoIndex++) { //change photoindex limit when more photos added to S3
   let randomCategoryId = Math.floor(Math.random() * categories.length); 
   db.run(`INSERT INTO pictures (url, id_category) VALUES (?, ?)`, [`https://s3.amazonaws.com/photo-carousel/Pictures_for_carousel/HotelPhoto${photoIndex}.jpg`, randomCategoryId], (err) => {
     if (err) {
@@ -156,8 +161,23 @@ for (var photoIndex = 1; photoIndex <= 58; photoIndex++) { //change photoindex l
   
 }
 
+for (let hotelIndex = 1; hotelIndex <= 100; hotelIndex++) {
+  let randomNumberOfPhotosToAddToEachHotel = Math.floor(Math.random() * 20); //may increase to create better diversity of pictures
+  for (let pictureIndex = 0; pictureIndex < randomNumberOfPhotosToAddToEachHotel; pictureIndex++) {
+    let randomHotelPicIdToAdd = Math.floor(Math.random() * numberOfS3Pics) + 1;
+    db.run(`INSERT OR IGNORE INTO hotels_pictures (id_hotels, id_pictures) VALUES (?, ?)`, [hotelIndex, randomHotelPicIdToAdd], (err) => {
+      if (err) {
+        return console.log(err.message);
+      }
+
+      console.log('Hotel picture associations for each hotel have been randomly generated');
+    })
+    
+  }
+}
 
 
+module.exports.db = db;
 
 
 

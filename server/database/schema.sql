@@ -68,7 +68,8 @@ CREATE TABLE `hotels_pictures` (
   `id_pictures` INTEGER(60) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_hotels`) REFERENCES `hotels` (`id`),
-  FOREIGN KEY (`id_pictures`) REFERENCES `pictures` (`id`)
+  FOREIGN KEY (`id_pictures`) REFERENCES `pictures` (`id`),
+  UNIQUE (`id_hotels`, `id_pictures`)
 );
 
 
