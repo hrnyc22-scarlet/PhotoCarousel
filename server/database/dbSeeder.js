@@ -122,7 +122,7 @@ var categories = [
   "Playtime",
   "Summer",
   "Water"
-]
+];
 
 var numberOfS3Pics = 58; //need to upload more photos later
 

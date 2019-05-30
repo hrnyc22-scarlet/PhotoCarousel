@@ -17,7 +17,7 @@ app.use(morgan('dev'));
 
 
 
-let port = 3005
+let port = 3005;
 app.listen(port, () => {
     console.log(`app is listening on port ${port}`)
 })
@@ -28,9 +28,8 @@ let getHotelPicturesById = hotelId => {
     db.all(
 
       //SQLite3 Query:
-      `SELECT pictures.url FROM pictures, hotels_pictures 
-        WHERE pictures.id = hotels_pictures.id_pictures AND
-        hotels_pictures.id_hotels = ${hotelId}`, 
+      `SELECT pictures.url FROM pictures
+        WHERE Hotel_id = ${hotelId}`, 
     
       //Callback:
     (err, hotelPictures) => {
