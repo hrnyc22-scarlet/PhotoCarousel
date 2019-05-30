@@ -2,7 +2,7 @@
 //const sqlite3 = require('sqlite3').verbose();
 //const fs = require('fs');
 //const path = require('path');
-const db = require('./database.js');
+const db = require('../database.js');
 //const readline = require('readline');
 const Promise = require('bluebird');
 

@@ -17,7 +17,7 @@ app.use(morgan('dev'));
 
 
 
-let port = 3005;
+let port = process.env.PORT || 3005;
 app.listen(port, () => {
     console.log(`app is listening on port ${port}`)
 })
