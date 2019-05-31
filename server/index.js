@@ -48,7 +48,7 @@ let getHotelPicturesById = hotelId => {
 
 
 
-app.get('http://3.215.111.101/hotelphotos/:hotelId', (req, res) => {
+app.get('/hotelphotos/:hotelId', (req, res) => {
   var hotelId = req.params.hotelId;
   getHotelPicturesById(hotelId)
   .then((pictureUrls) => {
