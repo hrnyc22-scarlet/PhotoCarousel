@@ -18,7 +18,7 @@ class App extends React.Component {
     }
 
     getPhotosById(id){
-        axios.get(`/hotelphotos/${id}`)
+        axios.get(`http://3.215.111.101/hotelphotos/${id}`)
         
         .then(({data}) => {
             console.log(data);
@@ -30,30 +30,15 @@ class App extends React.Component {
     }
 
     
-    getUrlID() {
-        let base = window.location.pathname
-        // console.log('==============================')
-        // console.log('=========Testing getUrlId=====')
-        // console.log('==============================')
-        //console.log('BASE: ', base)
-        let arr = base.split('/')
-        //console.log('ARRAY: ', arr)
-        let url = arr[2]
-        //console.log('URLID: ', url)
-        // console.log('==============================')
-        // console.log('=========Testing getUrlId=====')
-        // console.log('==============================')
-        return url
-    }
 
     componentDidMount() {
-        let id = this.getUrlID();
+        let id = window.location.href.slice(32);
         this.getPhotosById(id);
     }
 
     render() {
         return (
-            <div class = 'photocarousel-sort-container'>
+            <div className = 'photocarousel-sort-container'>
             <Carousel photos = {this.state}/>
             </div>
         );
