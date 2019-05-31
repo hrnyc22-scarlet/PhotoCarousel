@@ -18,7 +18,7 @@ class App extends React.Component {
     }
 
     getPhotosById(id){
-        axios.get(`http://3.215.111.101/hotelphotos/${id}`)
+        axios.get(`http://3.215.111.101:3005/hotelphotos/${id}`)
         
         .then(({data}) => {
             console.log(data);
