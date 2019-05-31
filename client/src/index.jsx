@@ -53,10 +53,12 @@ class App extends React.Component {
 
     render() {
         return (
+            <div class = 'photocarousel-sort-container'>
             <Carousel photos = {this.state}/>
+            </div>
         );
     }
 }
 
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app-carousel'));
