@@ -18,7 +18,7 @@
     "bluebird": "^3.5.4",
     "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "morgan": "^1.9.1",
     "popper.js": "^1.15.0",
     "react": "^16.8.6",
